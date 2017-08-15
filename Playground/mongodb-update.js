@@ -6,23 +6,20 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
         return console.log('Unable to connect to MongoDB server')
     }
     console.log('Connected to MongoDB server')
-    
-    // deleteMany
-    // db.collection('Users').deleteMany({_id:123}).then((result)=> {
-    //     console.log(result.result)
-    // })
 
-    // deleteOne
-    // db.collection('Todos').deleteOne({text:'Eat Lunch'}).then((result) => {
-    //     console.log(result)
-    // })
-
-    //findOneAndDelete
-    db.collection('User').findOneAndDelete({
+    db.collection('Users').findOneAndUpdate({
         _id: new ObjectID('5991736d15080ec766139c0b')
-        }).then((result) => {
+    }, {
+        $set: {
+            name: 'David'
+        }, 
+        $inc: {
+            age: -2
+        }
+    }, {
+        returnOriginal: false
+    }).then((result) => {
         console.log(result)
     })
-    
     // db.close()
 })
