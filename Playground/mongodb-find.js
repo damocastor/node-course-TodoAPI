@@ -22,10 +22,10 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
         location: {
             country: 'Germany'
         }
-    }).toArray().then((User) => {
-        var user = JSON.stringify(User, undefined, 2)
+    }).toArray().then((docs) => {
+        var user = JSON.stringify(docs, undefined, 2)
         console.log(`Users:${user}`)
-
+        
     }, (error) => {
         console.log('Unable to fetch todos', error)
     })
