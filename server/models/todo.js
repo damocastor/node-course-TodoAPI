@@ -19,24 +19,24 @@ var schema = new mongoose.Schema({
 
 var Todo = mongoose.model('Todo', schema)
 
-var newTodo = new Todo({
-    text: 'Shower',  
-})
+// var newTodo = new Todo({
+//     text: 'Shower',  
+// })
 
-newTodo.save().then((doc) => {
-    console.log('Saved Todo', doc)
-}, (error) => {
-    console.log('Unable to save todo')
-})
+// newTodo.save().then((doc) => {
+//     console.log('Saved Todo', doc)
+// }, (error) => {
+//     console.log('Unable to save todo')
+// })
 
-newTodo = new Todo({ 
-    text: 'Edit this video'
-})
+// newTodo = new Todo({ 
+//     text: 'Edit this video'
+// })
 
-newTodo.save().then((doc) => {
-    console.log(JSON.stringify(doc, undefined, 2))
-}, (error) => {
-    console.log(error)
-})
+// newTodo.save().then((doc) => {
+//     console.log(JSON.stringify(doc, undefined, 2))
+// }, (error) => {
+//     console.log(error)
+// })
 
 module.exports = {Todo}
