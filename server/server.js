@@ -63,7 +63,7 @@ app.delete('/todos/:id', (req, res) => {
             return responseFail(404);
         }
 
-        res.send(todo);
+        res.send({todo});
     }).catch((e) => {
         return responseFail(400)
     });
