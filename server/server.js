@@ -81,10 +81,10 @@ app.patch('/todos/:id', (req, res) => {
     }
 
     if (_.isBoolean(body.completed) && body.completed) {
-        body.completedAt = new Date().getTime()
+        body.completedAt = new Date().getTime();
     } else {
         body.completed = false;
-        body.completeAt = null 
+        body.completeAt = null;
     }
 
     Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
@@ -92,9 +92,9 @@ app.patch('/todos/:id', (req, res) => {
             return res.status(404).send();
          }
  
-         res.send({todo})
+         res.send({todo});
     }).catch((e) => {
-        res.status(400).send()
+        res.status(400).send();
     })
 })
 
