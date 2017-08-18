@@ -12,7 +12,7 @@ const todos = [{
     _id: new ObjectID(),
     text: "Second test todo",
     completed: false, 
-    completedAt: 222    
+    completedAt: 333    
 }]
 
 beforeEach((done) => {
