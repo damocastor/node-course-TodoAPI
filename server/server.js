@@ -67,24 +67,24 @@ app.delete('/todos/:id', (req, res) => {
     var id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
-        return responseFail(404);
+        return res.status(404).send();
     }
 
     Todo.findByIdAndRemove(id).then((todo) => {
         if(!todo) {
-            return responseFail(404);
+            return res.status(404).send();
         }
 
         res.send({todo});
     }).catch((e) => {
-        return responseFail(400)
+        return res.status(404).send()
     });
 })
 
 // PATCH /todo/:id
 app.patch('/todos/:id', (req, res) => {
     var id = req.params.id; 
-    var body = _.pick(req.body, ['text', 'completed'])
+    var body = _.pick(req.body, ['text', 'completed']);
 
     if (!ObjectID.isValid(id)) {
         return res.status(404).send();
@@ -94,7 +94,7 @@ app.patch('/todos/:id', (req, res) => {
         body.completedAt = new Date().getTime();
     } else {
         body.completed = false;
-        body.completeAt = null;
+        body.completedAt = null;
     }
 
     Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
@@ -106,7 +106,7 @@ app.patch('/todos/:id', (req, res) => {
     }).catch((e) => {
         res.status(400).send();
     })
-})
+});
 
 // POST /users
 
