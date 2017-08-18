@@ -8,6 +8,7 @@ const {ObjectID} = require('mongodb')
 var {mongoose} = require('./db/mongoose')
 var {Todo} = require('./models/todo')
 var {User} = require('./models/user')
+var {authenticate} = require('./middleware/authenticate')
 
 var app = express() 
 var port = process.env.PORT;
@@ -18,6 +19,7 @@ var responseFail = (statusCode) => {
     res.status(statusCode).send()  
 };
 
+//POST /todo - post a new todo to database
 app.post('/todos', (req, res) => {
     var todo = new Todo({
         text: req.body.text
@@ -30,6 +32,8 @@ app.post('/todos', (req, res) => {
     })
 })
 
+// GET /todos - get all todos
+
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
         res.send({todos})
@@ -37,6 +41,8 @@ app.get('/todos', (req, res) => {
         res.status(400).send(e)
     })
 })
+
+//GET /todos/:id - Get a todo by its id
 
 app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
@@ -56,6 +62,7 @@ app.get('/todos/:id', (req, res) => {
     })
 })
 
+// DELETE /todo/:id - delete a todo from the database
 app.delete('/todos/:id', (req, res) => {
     var id = req.params.id;
 
@@ -115,6 +122,10 @@ app.post('/users', (req, res) => {
         res.status(400).send(e)
     })
 })
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user)
+}) 
 
 app.listen(port, () => {
     console.log(`Started on port ${port}`)
